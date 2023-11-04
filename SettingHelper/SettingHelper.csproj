@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>hotari.pfx</AssemblyOriginatorKeyFile>
+    <Authors>Hotari</Authors>
+    <Version>2.0</Version>
+    <AssemblyVersion>2.0</AssemblyVersion>
+    <FileVersion>2.0</FileVersion>
+    <Copyright>Copyright © 2021 hotari13port@gmail.com</Copyright>
+  </PropertyGroup>
+
+  <Import Project="..\..\SharedWPF\SharedWPF\SharedWPF.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <Compile Remove="Base.cs" />
+    <Compile Remove="Bases\Base.cs" />
+    <Compile Remove="Bases\Container1Base.cs" />
+    <Compile Remove="Bases\Container2Base.cs" />
+    <Compile Remove="int.cs" />
+    <Compile Remove="Templates\BaseTemplate.cs" />
+    <Compile Remove="Templates\ContainerAccessorsTemplate.cs" />
+    <Compile Remove="Templates\ContainerRegistriesTemplate.cs" />
+    <Compile Remove="Types\bool.cs" />
+    <Compile Remove="Types\byte.cs" />
+    <Compile Remove="Types\Color.cs" />
+    <Compile Remove="Types\double.cs" />
+    <Compile Remove="Types\float.cs" />
+    <Compile Remove="Types\int.cs" />
+    <Compile Remove="Types\long.cs" />
+    <Compile Remove="Types\short.cs" />
+    <Compile Remove="Types\string.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Templates\BaseTemplate.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\ContainerAccessorsTemplate.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Types\float.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Types\long.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Types\byte.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Types\Color.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Types\string.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Types\short.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Types\bool.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Types\double.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Types\int.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Templates\ContainerRegistriesTemplate.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Extension.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

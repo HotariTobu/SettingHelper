@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettingHelper", "SettingHelper\SettingHelper.csproj", "{25783CD5-644C-467E-8CEE-4BB1DC9699A2}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedWPF", "..\SharedWPF\SharedWPF\SharedWPF.shproj", "{AE6E9D7E-4F8F-43C0-A1EB-9BCF75EF9FCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SettingTest", "SettingTest\SettingTest.csproj", "{C15F3502-6CC8-4164-A4D8-BF232DEE85E6}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\SharedWPF\SharedWPF\SharedWPF.projitems*{25783cd5-644c-467e-8cee-4bb1dc9699a2}*SharedItemsImports = 5
+		..\SharedWPF\SharedWPF\SharedWPF.projitems*{ae6e9d7e-4f8f-43c0-a1eb-9bcf75ef9fcb}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{25783CD5-644C-467E-8CEE-4BB1DC9699A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25783CD5-644C-467E-8CEE-4BB1DC9699A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25783CD5-644C-467E-8CEE-4BB1DC9699A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25783CD5-644C-467E-8CEE-4BB1DC9699A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C15F3502-6CC8-4164-A4D8-BF232DEE85E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C15F3502-6CC8-4164-A4D8-BF232DEE85E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C15F3502-6CC8-4164-A4D8-BF232DEE85E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C15F3502-6CC8-4164-A4D8-BF232DEE85E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63DA0017-D1AA-4533-AD05-4FB87E10F288}
+	EndGlobalSection
+EndGlobal

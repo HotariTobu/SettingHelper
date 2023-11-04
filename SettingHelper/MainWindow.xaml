@@ -1,0 +1,123 @@
+﻿<Window x:Class="SettingHelper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SettingHelper"
+        xmlns:shared="clr-namespace:SharedWPF"
+        mc:Ignorable="d"
+        Title="SettingHelper" Height="450" Width="800" AllowDrop="True"
+        DragOver="Window_DragOver"
+        Drop="Window_Drop">
+    <Window.Resources>
+        <shared:StringToColorConverter x:Key="BoolToColorConverter" Parameter="True/#80FFFFFF|False/#FFFF00"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal">
+            <TextBox Text="{Binding TreeContent[0].Name, UpdateSourceTrigger=PropertyChanged}" Width="150" Margin="10"/>
+            <Button Content="保存" Margin="10" Click="SaveButton_Click"/>
+            <Button Content="出力" Margin="10" Click="ExportButton_Click"/>
+        </StackPanel>
+        <TreeView Grid.Row="1" Grid.RowSpan="2" ItemsSource="{Binding TreeContent}" BorderBrush="WhiteSmoke" Margin="0,0,4,0"
+                  SelectedItemChanged="TreeView_SelectedItemChanged">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{Binding IsValid, Converter={StaticResource BoolToColorConverter}}"/>
+                        </Setter.Value>
+                    </Setter>
+                    <EventSetter Event="MouseLeave" Handler="TreeViewItem_MouseLeave"/>
+                    <EventSetter Event="DragOver" Handler="TreeViewItem_DragOver"/>
+                    <EventSetter Event="Drop" Handler="TreeViewItem_Drop"/>
+                </Style>
+            </TreeView.ItemContainerStyle>
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate DataType="local:Container" ItemsSource="{Binding Containers}">
+                    <TextBlock Text="{Binding Name}"/>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <GridSplitter Grid.Row="1" Grid.RowSpan="2" Width="4"/>
+        <Border Grid.Column="1" Grid.Row="1" BorderThickness="1" BorderBrush="WhiteSmoke" Margin="0,0,0,4">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl HorizontalAlignment="Left" ItemsSource="{Binding SelectedContainer.Containers}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="local:Container">
+                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Tag="{Binding}" Width="150" Margin="4"
+                                     KeyUp="TextBox_KeyUp"
+                                     LostFocus="TextBox_LostFocus">
+                                <TextBox.Background>
+                                    <SolidColorBrush Color="{Binding IsValid, Converter={StaticResource BoolToColorConverter}}"/>
+                                </TextBox.Background>
+                            </TextBox>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+        <GridSplitter Grid.Column="1" Grid.Row="1" Height="4" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+        <DataGrid Grid.Column="1" Grid.Row="2" ItemsSource="{Binding SelectedContainer.Items}" AutoGenerateColumns="False" BorderBrush="WhiteSmoke" Background="Transparent" CanUserDeleteRows="False"
+                  KeyUp="DataGrid_KeyUp"
+                  CellEditEnding="DataGrid_CellEditEnding">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="名前" Width="150" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTemplateColumn Header="型" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding DataContext.TypeList, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Mode=OneTime}" SelectedValue="{Binding Type, UpdateSourceTrigger=PropertyChanged}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate DataType="local:TypeTemplate">
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="既定値" Width="250" Binding="{Binding Value, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{Binding IsValid, Converter={StaticResource BoolToColorConverter}}"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" Value="SkyBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="AllowDrop" Value="True"/>
+                    <EventSetter Event="MouseLeave" Handler="DataGridRow_MouseLeave"/>
+                    <EventSetter Event="DragOver" Handler="DataGridRow_DragOver"/>
+                    <EventSetter Event="Drop" Handler="DataGridRow_Drop"/>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+    </Grid>
+</Window>
